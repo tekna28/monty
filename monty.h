@@ -1,6 +1,16 @@
 #ifndef __HEADER__
 #define __HEADER__
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+extern char **op_toks;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -30,5 +40,25 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/* Opcode functions */
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
+
+/* Error functions */
+int usage_error(void);
+int malloc_error(void);
+int file_open_error(char *filename);
+int unknown_instruction(char *opcode, unsigned int line_number);
+int no_int_error(unsigned int line_number);
+
+/* Monty interpreter functions */
+void free_stack(stack_t **stack);
+int init_stack(stack_t **stack);
+int check_mode(stack_t *stack);
+void free_tokens(void);
+unsigned int token_len(void);
+int run_monty_inter(FILE *F);
+void set_opcode_tokens_error(int error);
 
 #endif
