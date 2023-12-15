@@ -22,9 +22,9 @@ extern char **op_toks;
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+int n;
+struct stack_s *prev;
+struct stack_s *next;
 } stack_t;
 
 /**
@@ -37,13 +37,18 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+char *opcode;
+void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /* Opcode functions */
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
+void _add(stack_t **stack, unsigned int line_number);
+void _nop(stack_t **stack, unsigned int line_number);
 
 /* Error functions */
 int usage_error(void);
@@ -51,6 +56,9 @@ int malloc_error(void);
 int file_open_error(char *filename);
 int unknown_instruction(char *opcode, unsigned int line_number);
 int no_int_error(unsigned int line_number);
+int pint_error(unsigned int line_number);
+int stack_error(unsigned int line_number, char *op);
+int pop_error(unsigned int line_number);
 
 /* Monty interpreter functions */
 void free_stack(stack_t **stack);

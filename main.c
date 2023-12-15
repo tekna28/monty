@@ -15,18 +15,18 @@
  */
 int main(int argc, char **argv)
 {
-  FILE *F = NULL;
-  int exit = EXIT_SUCCESS;
+FILE *F = NULL;
+int exit = EXIT_SUCCESS;
 
-  if (argc != 2)
-    return (usage_error());
+if (argc != 2)
+return (usage_error());
 
-  F = fopen(argv[1], "r");
-  if (F == NULL)
-    return (file_open_error(argv[1]));
+F = fopen(argv[1], "r");
+if (F == NULL)
+return (file_open_error(argv[1]));
 
-  exit = run_monty_inter(F);
-  fclose(F);
+exit = run_monty_inter(F);
+fclose(F);
 
-  return (exit);
+return (exit);
 }
